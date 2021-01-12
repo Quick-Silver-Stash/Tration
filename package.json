@@ -5,8 +5,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject",
-    "commit": "git add . && git commit -m \"$npm_config_message\" "
+    "eject": "expo eject"
   },
   "dependencies": {
     "expo": "~40.0.0",
