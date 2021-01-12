@@ -6,7 +6,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "commit": "git add . && git commit -m \"$npm_config_message\" && git checkout $npm_config_branch && git push origin $npm_branch"
+    "commit": "git add . && git commit -m \"$npm_config_message\" "
   },
   "dependencies": {
     "expo": "~40.0.0",
