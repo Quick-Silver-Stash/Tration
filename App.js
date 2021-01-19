@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
 // export default function App() {
 //         const [email, setEmail] = useState("");
 //         const [password, setPassword] = useState("");
-      
+
 //         return (
 //           <View style={styles.container}>
 //             <Image
