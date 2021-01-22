@@ -6,7 +6,6 @@ import Quests from './src/screens/Quests/Quests';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
       {
         /*
         Put our designs here for now while we don't have a nav bar
@@ -24,6 +23,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+<<<<<<< HEAD
 });
 
 // Login Screen Test
@@ -131,3 +131,6 @@ const styles = StyleSheet.create({
 //     backgroundColor: "#0068D2",
 //   },
 // });
+=======
+});
+>>>>>>> 7fd1f4660b3bd6dba4e02ad674839aa2408b3411
