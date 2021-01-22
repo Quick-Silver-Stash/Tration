@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react';
-import {  View, Text, StyleSheet, Button, ScrollView, TouchableOpacity, Modal   } from 'react-native';
+import {  View, Text, StyleSheet, Button, ScrollView, TouchableOpacity, Modal, TouchableWithoutFeedback   } from 'react-native';
 import Quest from './Quest/Quest';
 
 function Quests(){
@@ -14,8 +14,13 @@ function Quests(){
     setShowQuest(true)
   };
 
+  function closeQuest(){
+    setSelectedQuest(null);
+    setShowQuest(false);
+  }
+
   return(
-    <View style = {styles.screen}>
+    <View style = {{height: '100%'}}>
       <View style = {styles.topContainer}>
         <Text style = {styles.headline}>Quests</Text>
       </View>
@@ -74,19 +79,21 @@ function Quests(){
       <Modal
         transparent={true}
         visible= {showQuest}
-        animationType="slide"
+        animationType="fade"
       >
-        <View style = {styles.modalView}>
-          <Quest pressCancel = {() => setShowQuest(false)}/>
-        </View>
+        <TouchableOpacity style = {styles.modalView} onPress={() => closeQuest()}>
+          <View style = {{height: '30%',width:'90%'}}>
+            <TouchableOpacity activeOpacity = {1}>
+              <Quest pressCancel = {() => setShowQuest(false)}/>
+            </TouchableOpacity >
+          </View>
+        </TouchableOpacity>
       </Modal>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-    screen: {
-    },
     topContainer:{
       backgroundColor: '#219DFC',
       height: '10%',
@@ -139,9 +146,11 @@ const styles = StyleSheet.create({
       justifyContent: 'center'
     },
     modalView: {
-      marginVertical: '50%',
+      justifyContent: 'center',
+      alignItems: 'center',
       height: '100%',
-      elevation: 5,
+      width: '100%',
+      backgroundColor: 'rgba(0,0,0,0.5)'
     }
 })
 
