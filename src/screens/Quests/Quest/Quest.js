@@ -8,7 +8,6 @@ function Quest(props){
         <Text style = {styles.title}>Eat 3 meals per day</Text>
       </View>
       <View style = {styles.descContainer}>
-        <Text style = {{fontWeight: 'bold', paddingBottom:15}}>Description</Text>
         <Text style = {styles.description}>Try to eat 3 meals per day. Eat a meal at 9am, 1pm, and 6pm. Try to do everything with give or take one hour</Text>
       </View>
       <View style = {styles.buttonContainer}>
@@ -25,7 +24,7 @@ function Quest(props){
 
 const styles = StyleSheet.create({
     screen: {
-      height: '50%',
+      backgroundColor: 'white',
     },
     titleContainer:{
       height:'10%',
@@ -37,18 +36,20 @@ const styles = StyleSheet.create({
       fontSize: 20,
     },
     descContainer: {
-      marginVertical: 20
+      marginVertical: 20,
+      justifyContent: 'center'
     },
     description: {
       fontSize: 15
     },
     buttonContainer: {
-      flexDirection: 'row'
+      flexDirection: 'row',
+      height: '25%'
     },
     button: {
       backgroundColor: '#219DFC',
       width: '50%',
-      height: '55%',
+      height: '100%',
       elevation: 20,
       justifyContent: 'center'
     },
