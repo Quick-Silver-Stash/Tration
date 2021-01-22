@@ -25,6 +25,8 @@ function Quest(props){
 const styles = StyleSheet.create({
     screen: {
       backgroundColor: 'white',
+      width:'100%',
+      height: '100%'
     },
     titleContainer:{
       height:'10%',
@@ -37,14 +39,15 @@ const styles = StyleSheet.create({
     },
     descContainer: {
       marginVertical: 20,
-      justifyContent: 'center'
+      justifyContent: 'center',
     },
     description: {
-      fontSize: 15
+      fontSize: 15,
+      textAlign: 'center'
     },
     buttonContainer: {
       flexDirection: 'row',
-      height: '25%'
+      height: '25%',
     },
     button: {
       backgroundColor: '#219DFC',
