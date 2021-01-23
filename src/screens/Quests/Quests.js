@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
       textAlign: 'center',
     },
     questsContainer: {
-      height: "70%",
+      height: "70%"
     },
     quest:{
       elevation:15,
