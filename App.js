@@ -6,7 +6,6 @@ import Quests from './src/screens/Quests/Quests';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
       {
         /*
         Put our designs here for now while we don't have a nav bar
@@ -21,8 +20,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
 });
 
@@ -42,7 +41,7 @@ const styles = StyleSheet.create({
 // export default function App() {
 //         const [email, setEmail] = useState("");
 //         const [password, setPassword] = useState("");
-      
+
 //         return (
 //           <View style={styles.container}>
 //             <Image
