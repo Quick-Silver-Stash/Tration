@@ -93,7 +93,7 @@ const bottomTabNavigator = createBottomTabNavigator(
   {
     initialRouteName: 'Landing',
     tabBarOptions: {
-      activeTintColor: '#eb6e3d'
+      activeTintColor: '#3dbaeb'
     }
   }
 );

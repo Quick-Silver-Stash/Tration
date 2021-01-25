@@ -10,9 +10,10 @@ import {
   View,
 } from "react-native";
 
-export default function Login() {
+export default function Register() {
         const [email, setEmail] = useState("");
         const [password, setPassword] = useState("");
+        const [confirmPassword, setConfirmPassword] = useSate("");
       
         return (
           <View style={styles.container}>
@@ -43,16 +44,26 @@ export default function Login() {
                 autoCapitalize={false}
                 autoCorrect={false}
                 onChangeText={(password) => setPassword(password)}
+                value={pasword}
+              />
+            </View>
+            <View style={styles.inputView}>
+              <TextInput
+                style={styles.TextInput}
+                placeholder="Confirm Password"
+                placeholderTextColor="#003f5c"
+                secureTextEntry={true}
+                autoCapitalize={false}
+                autoCorrect={false}
+                onChangeText={(confirmPassword) => setConfirmPassword(confirmPassword)}
+                value={confirmPassword}
               />
             </View>
             <TouchableOpacity>
-              <Text style={styles.forgot_button}>Forgot Password?</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.register_button}>Don't have an account yet?</Text>
+              <Text style={styles.register_button}>Already have an account yet? Login</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.loginButton}>
-              <Text style={styles.loginText}>LOGIN</Text>
+              <Text style={styles.loginText}>SIGN UP</Text>
             </TouchableOpacity>
           </View>
         );
