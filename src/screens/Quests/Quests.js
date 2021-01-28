@@ -1,10 +1,19 @@
-import React, {Component, useState} from 'react';
+import React, {Component, useState, useEffect } from 'react';
 import {  View, Text, StyleSheet, Button, ScrollView, TouchableOpacity, Modal, TouchableWithoutFeedback   } from 'react-native';
 import Quest from './Quest/Quest';
+import {db} from '../../config';
 
 function Quests(){
   const [selectedQuest, setSelectedQuest] = useState({});
   const [showQuest, setShowQuest] = useState(false);
+
+  useEffect(() => {
+    db.ref('/User').on('value', querySnapShot => {
+      let data = querySnapShot.val() ? querySnapShot.val() : {}
+      console.log(data[2])
+
+    })
+  });
 
   /*Will have to later determine how a quest comes in*/
   function selectQuest(quest){
@@ -18,6 +27,7 @@ function Quests(){
     setSelectedQuest(null);
     setShowQuest(false);
   }
+
 
   return(
     <View style = {{height: '100%'}}>

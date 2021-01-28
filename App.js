@@ -5,11 +5,13 @@ import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createAppContainer } from 'react-navigation';
 import Icon from "react-native-vector-icons/FontAwesome";
 import Quests from './src/screens/Quests/Quests';
+import {db} from './src/config';
 
-export default class App extends React.Component {
+
+export default class App extends React.Component{
   render() {
     return (
-        <AppContainer />
+        <Quests />
     );
   }
 }
