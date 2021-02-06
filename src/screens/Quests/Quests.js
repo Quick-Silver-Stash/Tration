@@ -5,28 +5,66 @@ import {db} from '../../config';
 
 function Quests(){
   const [selectedQuest, setSelectedQuest] = useState({});
+  const [allQuests, setAllQuests] = useState([]);
   const [showQuest, setShowQuest] = useState(false);
 
   useEffect(() => {
-    db.ref('/User').on('value', querySnapShot => {
-      let data = querySnapShot.val() ? querySnapShot.val() : {}
-      console.log(data[2])
-
+    db.ref('/Quest').on('value', querySnapShot => {
+      /*An array to store data relevant to the user*/
+       let dataObjects =  [];
+       /*Loop over queried quests and retrieve only relevant data*/
+       querySnapShot.forEach(d => {
+         let data = d.val()
+         dataObjects.push({
+           title: data.title,
+           description: data.description,
+           questType: data.questType,
+           questFrequency: data.questFrequency,
+           isComplete: data.isComplete,
+           isActive: data.isActive,
+           createdOn: data.createdOn,
+           updatedOn: data.updatedOn,
+           userId: data.userId
+         })
+       });
+      setAllQuests(dataObjects)
     })
-  });
+  }, []);
 
-  /*Will have to later determine how a quest comes in*/
+  /*Single quest has been selected and showing single quest screen*/
   function selectQuest(quest){
+    /*Needs work on how this gets saved*/
     setSelectedQuest({
-      name: "quest1"
+      title: quest.title,
+      description: quest.description,
+      questType: quest.questType,
+      questFrequency: quest.questFrequency,
+      isComplete: quest.isComplete,
+      isActive: quest.isActive,
+      createdOn: quest.createdOn,
+      updatedOn: quest.updatedOn,
+      userId: quest.userId
     });
     setShowQuest(true)
   };
 
+  /*Clicking away from single quest screen*/
   function closeQuest(){
     setSelectedQuest(null);
     setShowQuest(false);
   }
+
+  /*Create a TouchableOpacity of every quest that is relevant to the user*/
+  let displayQuests = allQuests.map(q => {
+    /*Change color of quest displayed depending on isActive*/
+    return <TouchableOpacity
+      style = {[styles.quest, {backgroundColor: q.isActive ? '#2BC803' : '#F43838'}]}
+      onPress={() => selectQuest(q)}
+      key = {q.title}
+    >
+      <Text style = {styles.questText}> {q.title} </Text>
+    </TouchableOpacity>
+  });
 
 
   return(
@@ -54,36 +92,7 @@ function Quests(){
           bounces = {true}
           nestedScrollEnabled = {true}
         >
-          <TouchableOpacity style = {styles.quest} onPress={() => selectQuest()}>
-            <Text style = {styles.questText}>Eat 2000 calories</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style = {styles.quest} onPress={() => selectQuest()}>
-            <Text style = {styles.questText}>Run 3 miles</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style = {styles.quest} onPress={() => selectQuest()}>
-            <Text style = {styles.questText}>Sleep 8 hours</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style = {styles.quest} onPress={() => selectQuest()}>
-            <Text style = {styles.questText}>Drink a liter of water</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style = {styles.quest} onPress={() => selectQuest()}>
-            <Text style = {styles.questText}>Cry 500ml to release the water</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style = {styles.quest} onPress={() => selectQuest()}>
-            <Text style = {styles.questText}>Eat 3 meals</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style = {styles.quest} onPress={() => selectQuest()}>
-            <Text style = {styles.questText}>Stretch for 15 minutes before work</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style = {styles.quest} onPress={() => selectQuest()}>
-            <Text style = {styles.questText}>Stretch for 15 minutes before going to bed</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style = {styles.quest} onPress={() => selectQuest()}>
-            <Text style = {styles.questText}>Go to bed before midnight</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style = {styles.quest} onPress={() => selectQuest()}>
-            <Text style = {styles.questText}>Eat one healthy meal per day</Text>
-          </TouchableOpacity>
+          {displayQuests}
         </ScrollView>
       </View>
       <Modal
