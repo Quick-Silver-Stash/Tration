@@ -4,7 +4,17 @@ import Quest from './Quest/Quest';
 import {db} from '../../config';
 
 function Quests(){
-  const [selectedQuest, setSelectedQuest] = useState({});
+  const [selectedQuest, setSelectedQuest] = useState({
+    title: null,
+    description: null,
+    questType: null,
+    questFrequency: null,
+    isComplete: null,
+    isActive: null,
+    createdOn: null,
+    updatedOn: null,
+    userId: null
+  });
   const [allQuests, setAllQuests] = useState([]);
   const [showQuest, setShowQuest] = useState(false);
 
@@ -33,8 +43,7 @@ function Quests(){
 
   /*Single quest has been selected and showing single quest screen*/
   function selectQuest(quest){
-    /*Needs work on how this gets saved*/
-    setSelectedQuest({
+    let obj = {
       title: quest.title,
       description: quest.description,
       questType: quest.questType,
@@ -44,13 +53,24 @@ function Quests(){
       createdOn: quest.createdOn,
       updatedOn: quest.updatedOn,
       userId: quest.userId
-    });
+    }
+    setSelectedQuest(obj);
     setShowQuest(true)
   };
 
   /*Clicking away from single quest screen*/
   function closeQuest(){
-    setSelectedQuest(null);
+    setSelectedQuest({
+      title: null,
+      description: null,
+      questType: null,
+      questFrequency: null,
+      isComplete: null,
+      isActive: null,
+      createdOn: null,
+      updatedOn: null,
+      userId: null
+    });
     setShowQuest(false);
   }
 
@@ -65,7 +85,6 @@ function Quests(){
       <Text style = {styles.questText}> {q.title} </Text>
     </TouchableOpacity>
   });
-
 
   return(
     <View style = {{height: '100%'}}>
@@ -103,7 +122,10 @@ function Quests(){
         <TouchableOpacity style = {styles.modalView} onPress={() => closeQuest()}>
           <View style = {{height:'50%', width:'90%'}}>
             <TouchableOpacity activeOpacity = {1}>
-              <Quest pressCancel = {() => setShowQuest(false)}/>
+              <Quest
+                pressCancel = {() => setShowQuest(false)}
+                questData = {selectedQuest}
+              />
             </TouchableOpacity >
           </View>
         </TouchableOpacity>
