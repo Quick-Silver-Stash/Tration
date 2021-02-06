@@ -11,7 +11,7 @@ import {db} from './src/config';
 export default class App extends React.Component{
   render() {
     return (
-        <Quests />
+        <AppContainer />
     );
   }
 }
