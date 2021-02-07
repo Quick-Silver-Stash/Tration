@@ -6,10 +6,10 @@ function Quest(props){
     <View style = {styles.screen}>
       <View style = {styles.details}>
         <View style = {styles.titleContainer}>
-          <Text style = {styles.title}>Eat 3 meals per day</Text>
+          <Text style = {styles.title}>{props.questData.title}</Text>
         </View>
         <View style = {styles.descContainer}>
-          <Text style = {styles.description}>Try to eat 3 meals per day. Eat a meal at 9am, 1pm, and 6pm. Try to do everything with give or take one hour</Text>
+          <Text style = {styles.description}>{props.questData.description}</Text>
         </View>
       </View>
       <View style = {styles.buttonContainer}>
