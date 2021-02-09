@@ -10,63 +10,68 @@ import {
   View,
 } from "react-native";
 
-export default function Register() {
-        const [email, setEmail] = useState("");
-        const [password, setPassword] = useState("");
-        const [confirmPassword, setConfirmPassword] = useSate("");
-      
-        return (
-          <View style={styles.container}>
-            <Image
-              style={styles.image}
-              source={require("./assets/placeholder-logo-1.png")}
-            />
-            <StatusBar style='auto'/>
-            <View style={styles.inputView}>
-              <TextInput
-                style={styles.TextInput}
-                placeholder="Enter Email"
-                placeholderTextColor="#003f5c"
-                keyboardType="email-address"
-                secureTextEntry={false}
-                autoCapitalize={false}
-                autoCorrect={false}
-                onChangeText={(email) => setEmail(email)}
-                value={email}
-              />
-            </View>
-            <View style={styles.inputView}>
-              <TextInput
-                style={styles.TextInput}
-                placeholder="Enter Password"
-                placeholderTextColor="#003f5c"
-                secureTextEntry={true}
-                autoCapitalize={false}
-                autoCorrect={false}
-                onChangeText={(password) => setPassword(password)}
-                value={pasword}
-              />
-            </View>
-            <View style={styles.inputView}>
-              <TextInput
-                style={styles.TextInput}
-                placeholder="Confirm Password"
-                placeholderTextColor="#003f5c"
-                secureTextEntry={true}
-                autoCapitalize={false}
-                autoCorrect={false}
-                onChangeText={(confirmPassword) => setConfirmPassword(confirmPassword)}
-                value={confirmPassword}
-              />
-            </View>
-            <TouchableOpacity>
-              <Text style={styles.register_button}>Already have an account yet? Login</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.loginButton}>
-              <Text style={styles.loginText}>SIGN UP</Text>
-            </TouchableOpacity>
-          </View>
-        );
+class Register extends Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.state = {
+      email: '',
+      password: '',
+      name: ''
+    }
+  }
+
+  handleChange = name => event => {
+    console.log('Typed ', event.target.value);
+    this.setState({
+      [name]: event.target.value
+    })
+    console.log("email: ", this.email);
+    console.log("password: ", this.password);
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Image
+          style={styles.image}
+          source={require("./assets/placeholder-logo-1.png")}
+        />
+        <StatusBar style='auto'/>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Enter Email"
+            placeholderTextColor="#003f5c"
+            keyboardType="email-address"
+            secureTextEntry={false}
+            autoCapitalize={false}
+            autoCorrect={false}
+            onChange={this.handleChange('email')}
+            value={this.state.email}
+          />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Enter Password"
+            placeholderTextColor="#003f5c"
+            secureTextEntry={true}
+            autoCapitalize={false}
+            autoCorrect={false}
+            onChange={this.handleChange('password')}
+            value={this.state.pasword}
+          />
+        </View>
+        <TouchableOpacity>
+          <Text style={styles.register_button}>Already have an account yet? Login</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.loginButton}>
+          <Text style={styles.loginText}>SIGN UP</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -113,3 +118,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#0068D2",
   },
 });
+
+export default Register

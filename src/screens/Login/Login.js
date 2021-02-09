@@ -10,6 +10,37 @@ import {
   View,
 } from "react-native";
 
+const INITIAL_STATE = {
+  email: '',
+  password: '',
+  error: null
+};
+
+const updateByPropertyName = (propertyName, value) => () => ({
+  [propertyName]: value,
+});
+
+class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.handleChanges = this.handleChanges.bind(this);
+    this.state = {
+      email: '',
+      password: '',
+      ...INITIAL_STATE
+    }
+  }
+
+  handleChange = name => evernt => {
+    console.log('Typed: ', event.target.value);
+    this.setState({
+      [name]: event.target.value
+    })
+    console.log("email: ", this.email)
+    console.log("password: ", this.password)
+  }
+}
+
 export default function Login() {
         const [email, setEmail] = useState("");
         const [password, setPassword] = useState("");
@@ -102,3 +133,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#0068D2",
   },
 });
+
+export default Login
