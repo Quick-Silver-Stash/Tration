@@ -6,6 +6,7 @@ import { createAppContainer } from 'react-navigation';
 import Icon from "react-native-vector-icons/FontAwesome";
 import Quests from './src/screens/Quests/Quests';
 import {db} from './src/config';
+import AddQuest from './src/screens/AddQuest/AddQuest';
 
 
 export default class App extends React.Component{

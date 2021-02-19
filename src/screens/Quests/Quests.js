@@ -97,13 +97,11 @@ function Quests(){
               <Text style = {styles.categoryText}>Daily</Text>
             </View>
           </TouchableOpacity>
-        <View style = {styles.categoryToggle}>
           <TouchableOpacity>
             <View style = {styles.categoryToggle}>
               <Text style = {styles.categoryText}>Extended</Text>
             </View>
           </TouchableOpacity>
-        </View>
       </View>
       <View style = {styles.questsContainer}>
         <ScrollView
