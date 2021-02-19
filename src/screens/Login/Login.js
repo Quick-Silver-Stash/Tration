@@ -13,12 +13,12 @@ import {
 export default function Login() {
         const [email, setEmail] = useState("");
         const [password, setPassword] = useState("");
-      
+
         return (
           <View style={styles.container}>
             <Image
               style={styles.image}
-              source={require("./assets/placeholder-logo-1.png")}
+              source={require("../../../assets/placeholder-logo-1.png")}
             />
             <StatusBar style='auto'/>
             <View style={styles.inputView}>

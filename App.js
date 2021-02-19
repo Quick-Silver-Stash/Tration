@@ -12,7 +12,7 @@ import AddQuest from './src/screens/AddQuest/AddQuest';
 export default class App extends React.Component{
   render() {
     return (
-        <AppContainer />
+        <AppContainer  />
     );
   }
 }

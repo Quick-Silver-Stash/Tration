@@ -6,39 +6,43 @@ function AddQuest(props){
   const [desc, setDesc] = useState("");
   const [selectedType, setSelectedType] = useState("")
   const [selectedFreq, setSelectedFreq] = useState("")
+
+
   return(
-    <View style = {{height: '100%'}}>
+    <View style = {{height: '100%', backgroundColor: 'white'}}>
       <View style = {styles.topContainer}>
         <Text style = {styles.headline}>Add Quest</Text>
       </View>
       <View style = {styles.title}>
         <TextInput
+          label = "Title"
           style={styles.textInput}
           onChangeText = {(text) => setTitle(text)}
           value = {title}
-          placeholder = "Enter Quest Title"
+          placeholder = "Enter Title"
         />
       </View>
       <View style = {styles.description}>
         <TextInput
+          label = "Description"
           style={styles.textInput}
           onChangeText = {(text) => setDesc(text)}
           value = {desc}
-          placeholder = "Enter Quest Description"
+          placeholder = "Enter Description"
         />
       </View>
       <View style = {styles.questType}>
 
 
         <View style = {styles.qTypeContainer}>
-          <TouchableOpacity style = {[styles.qTypeButton, {backgroundColor: '#ADD8E6'}]}  onPress={type => setSelectedType(type)}>
-            <Text style = {styles.qTypeButtonText}>Nutrition</Text>
+          <TouchableOpacity style = {[styles.qTypeButton, {backgroundColor: selectedType == "Nutrition" ? '#9370DB' : '#ADD8E6'}]}  onPress={() => setSelectedType("Nutrition")}>
+            <Text style = {styles.buttonText}>Nutrition</Text>
           </TouchableOpacity>
-          <TouchableOpacity style = {[styles.qTypeButton, {backgroundColor: '#00BFFF'}]} onPress={type => setSelectedType(type)}>
-            <Text style = {styles.qTypeButtonText}>Excercise</Text>
+          <TouchableOpacity style = {[styles.qTypeButton, {backgroundColor: selectedType == "Excercise" ? '#9370DB' : '#ADD8E6'}]} onPress={() => setSelectedType("Excercise")}>
+            <Text style = {styles.buttonText}>Excercise</Text>
           </TouchableOpacity>
-          <TouchableOpacity style = {[styles.qTypeButton, {backgroundColor: '#9370DB'}]} onPress={type => setSelectedType(type)}>
-            <Text style = {styles.qTypeButtonText}>Rest</Text>
+          <TouchableOpacity style = {[styles.qTypeButton, {backgroundColor: selectedType == "Rest" ? '#9370DB' : '#ADD8E6'}]} onPress={() => setSelectedType("Rest")}>
+            <Text style = {styles.buttonText}>Rest</Text>
           </TouchableOpacity>
         </View>
 
@@ -47,15 +51,23 @@ function AddQuest(props){
       <View style = {styles.questFrequency}>
 
         <View style = {styles.qFreqContainer}>
-          <TouchableOpacity style = {[styles.qFreqButton, {backgroundColor: '#ADD8E6'}]}  onPress={type => setSelectedType(type)}>
-            <Text style = {styles.qFreqButtonText}>Daily</Text>
+          <TouchableOpacity style = {[styles.qFreqButton, {backgroundColor: selectedFreq == "Daily" ? '#9370DB' : '#ADD8E6'}]}  onPress={() => setSelectedFreq("Daily")}>
+            <Text style = {styles.buttonText}>Daily</Text>
           </TouchableOpacity>
-          <TouchableOpacity style = {[styles.qFreqButton, {backgroundColor: '#9370DB'}]} onPress={type => setSelectedType(type)}>
-            <Text style = {styles.qFreqButtonText}>Extended</Text>
+          <TouchableOpacity style = {[styles.qFreqButton, {backgroundColor: selectedFreq == "Extended" ? '#9370DB' : '#ADD8E6'}]} onPress={() => setSelectedFreq("Extended")}>
+            <Text style = {styles.buttonText}>Extended</Text>
           </TouchableOpacity>
         </View>
 
 
+      </View>
+      <View style = {styles.decisionButtonContainer}>
+          <TouchableOpacity style = {[styles.decisionButton, {backgroundColor: '#F43838'}]}  >
+            <Text style = {styles.buttonText}>Cancel</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style = {[styles.decisionButton, {backgroundColor: '#2BC803'}]} >
+            <Text style = {styles.buttonText}>Submit</Text>
+          </TouchableOpacity>
       </View>
     </View>
   )
@@ -64,11 +76,10 @@ function AddQuest(props){
 
 const styles = StyleSheet.create({
   topContainer:{
-    backgroundColor: '#219DFC',
     height: '10%',
     flexDirection: 'row',
     justifyContent: 'center',
-    marginBottom: 10
+    marginBottom: 20
   },
   headline: {
     fontWeight: 'bold',
@@ -84,11 +95,11 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   questType: {
-    flex: 1,
+    flex: 2,
     alignItems: 'center'
   },
   questFrequency: {
-    flex: 1,
+    flex: 2,
     alignItems: 'center'
   },
   textInput: {
@@ -98,21 +109,17 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   qTypeContainer: {
-    width: '90%',
+    width: '80%',
     flexDirection: 'row',
     flex: 1,
-    justifyContent: 'space-between'
+    justifyContent: 'space-evenly'
   },
   qTypeButton: {
     flex: 1,
-    height: '40%',
+    height: '30%',
     elevation: 20,
     justifyContent: 'center',
-  },
-  qTypeButtonText: {
-    fontWeight: 'bold',
-    fontSize: 15,
-    textAlign: 'center',
+    borderRadius: 20,
   },
   qFreqContainer: {
     width: '90%',
@@ -122,15 +129,27 @@ const styles = StyleSheet.create({
   },
   qFreqButton: {
     flex: 1,
-    height: '40%',
+    height: '30%',
     elevation: 20,
     justifyContent: 'center',
+    borderRadius: 20,
   },
-  qFreqButtonText: {
+  decisionButtonContainer: {
+    flexDirection: 'row',
+    flex: 2
+  },
+  decisionButton: {
+    width: '50%',
+    height: '50%',
+    elevation: 20,
+    justifyContent: 'center',
+    alignSelf: 'flex-end'
+  },
+  buttonText: {
     fontWeight: 'bold',
     fontSize: 15,
     textAlign: 'center',
-  },
+  }
 })
 
 export default AddQuest;
