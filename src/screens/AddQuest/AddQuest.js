@@ -49,7 +49,6 @@ function AddQuest(props){
 
       </View>
       <View style = {styles.questFrequency}>
-
         <View style = {styles.qFreqContainer}>
           <TouchableOpacity style = {[styles.qFreqButton, {backgroundColor: selectedFreq == "Daily" ? '#9370DB' : '#ADD8E6'}]}  onPress={() => setSelectedFreq("Daily")}>
             <Text style = {styles.buttonText}>Daily</Text>
@@ -59,13 +58,12 @@ function AddQuest(props){
           </TouchableOpacity>
         </View>
 
-
       </View>
       <View style = {styles.decisionButtonContainer}>
-          <TouchableOpacity style = {[styles.decisionButton, {backgroundColor: '#F43838'}]}  >
+          <TouchableOpacity style = {[styles.decisionButton, {backgroundColor: '#F43838'}]}  onPress= {props.pressCancel}>
             <Text style = {styles.buttonText}>Cancel</Text>
           </TouchableOpacity>
-          <TouchableOpacity style = {[styles.decisionButton, {backgroundColor: '#2BC803'}]} >
+          <TouchableOpacity style = {[styles.decisionButton, {backgroundColor: '#2BC803'}]} onPress= {props.pressCancel}>
             <Text style = {styles.buttonText}>Submit</Text>
           </TouchableOpacity>
       </View>
@@ -88,15 +86,18 @@ const styles = StyleSheet.create({
   },
   title:{
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
+    marginVertical: 10
   },
   description: {
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
+    marginVertical: 10
   },
   questType: {
     flex: 2,
-    alignItems: 'center'
+    alignItems: 'center',
+    marginVertical: 10
   },
   questFrequency: {
     flex: 2,
@@ -136,11 +137,11 @@ const styles = StyleSheet.create({
   },
   decisionButtonContainer: {
     flexDirection: 'row',
-    flex: 2
+    flex: 1
   },
   decisionButton: {
     width: '50%',
-    height: '50%',
+    height: '100%',
     elevation: 20,
     justifyContent: 'center',
     alignSelf: 'flex-end'

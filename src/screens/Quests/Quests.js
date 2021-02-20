@@ -145,11 +145,10 @@ function Quests(){
         animationType="fade"
       >
         <TouchableOpacity style = {styles.modalView} onPress={() => setShowAddQuest(false)}>
-          <View style = {{height:'50%', width:'90%'}}>
+          <View style = {{height:'70%', width:'90%'}}>
             <TouchableOpacity activeOpacity = {1}>
               <AddQuest
-                pressCancel = {() => setShowQuest(false)}
-                questData = {selectedQuest}
+                pressCancel = {() => setShowAddQuest(false)}
               />
             </TouchableOpacity >
           </View>
