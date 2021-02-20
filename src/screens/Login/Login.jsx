@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, Component } from "react";
+import { auth } from "../../firebase";
 import {
   StyleSheet,
   Text,
@@ -10,41 +11,49 @@ import {
   View,
 } from "react-native";
 
-const INITIAL_STATE = {
-  email: '',
-  password: '',
-  error: null
-};
-
-const updateByPropertyName = (propertyName, value) => () => ({
-  [propertyName]: value,
-});
-
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.handleChanges = this.handleChanges.bind(this);
-    this.state = {
-      email: '',
-      password: '',
-      ...INITIAL_STATE
-    }
-  }
-
-  handleChange = name => evernt => {
-    console.log('Typed: ', event.target.value);
-    this.setState({
-      [name]: event.target.value
-    })
-    console.log("email: ", this.email)
-    console.log("password: ", this.password)
-  }
-}
-
 export default function Login() {
-        const [email, setEmail] = useState("");
-        const [password, setPassword] = useState("");
-      
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [errorResponse, setErrorResponse] = React.useState("");
+  
+  const clearError = () => {
+    if (errorResponse != "") {
+      setErrorResponse("")
+    }
+  };
+
+  const onChangeHandler = (event) => {
+    const {name, value} = event.currentTarget;
+
+    if(name === 'email') {
+      setEmail(value);
+    } else if (name === 'password') {
+      setPassword(value);
+    }
+  };
+  
+  const tryLogIn = async () => {
+    auth.doSignInWithEmailAndPassword(email, password).catch((err) => {
+      setPassword("");
+      switch (err.code) {
+        default:
+          setErrorResponse("An error has occured");
+      }
+    });
+  };
+
+  const tryRegister = async () => {
+    auth.doCreateUser(email, password).catch((err) => {
+      switch (err.code) {
+        case "auth/email-already-in-use":
+          setErrorResponse(err.message);
+          break;
+        default:
+          setErrorResponse("An unkown error has occured");
+      }
+    });
+  };
+
         return (
           <View style={styles.container}>
             <Image
@@ -61,7 +70,8 @@ export default function Login() {
                 secureTextEntry={false}
                 autoCapitalize={false}
                 autoCorrect={false}
-                onChangeText={(email) => setEmail(email)}
+                onChange = {(event) => onChangeHandler(event)}
+                // onChangeText={(email) => setEmail(email)}
                 value={email}
               />
             </View>
@@ -73,18 +83,27 @@ export default function Login() {
                 secureTextEntry={true}
                 autoCapitalize={false}
                 autoCorrect={false}
-                onChangeText={(password) => setPassword(password)}
+                onChange = {(event) => onChangeHandler(event)}
+                // onChangeText={(password) => setPassword(password)}
               />
             </View>
             <TouchableOpacity>
               <Text style={styles.forgot_button}>Forgot Password?</Text>
             </TouchableOpacity>
             <TouchableOpacity>
-              <Text style={styles.register_button}>Don't have an account yet?</Text>
+              <Text style={styles.register_button}>
+                Don't have an account yet?
+                <Link to="register">
+                  Sign Up Here
+                </Link>
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.loginButton}>
               <Text style={styles.loginText}>LOGIN</Text>
             </TouchableOpacity>
+            <button onClick={tryLogIn}>Log In </button> {" "}
+            
+            <div className="error_response">{errorResponse}</div>
           </View>
         );
 }
