@@ -1,5 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, Component } from "react";
+import firebase from "firebase/app";
+import "firebase/functions";
 import {
   StyleSheet,
   Text,
@@ -9,6 +11,24 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+
+function registerUser(firstName, lastName, email, password) {
+  let registerFn = firebase.functions().httpsCallable('register');
+  registerFn({ firstName: firstName, lastName: lastName, email: email, password: password})
+    .then((result) => {
+      console.log("Successfully registered user");
+      console.log(result);
+    })
+    .catch((result) => {
+      console.log("Registration failed");
+      let code = error.code;
+      let message = error.message;
+      let details = error.details;
+      console.log(code);
+      console.log(message);
+      console.log(details);
+    })
+}
 
 export default function Register() {
         const [email, setEmail] = useState("");
@@ -60,11 +80,12 @@ export default function Register() {
               />
             </View>
             <TouchableOpacity>
-              <Text style={styles.register_button}>Already have an account yet? Login</Text>
+              <Text style={styles.register_button}>Already have an account? Login</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.loginButton}>
+            <button onClick={registerUser}> SIGN UP </button>
+            {/* <TouchableOpacity style={styles.loginButton}>
               <Text style={styles.loginText}>SIGN UP</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         );
 }
