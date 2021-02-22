@@ -4,15 +4,18 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createAppContainer } from 'react-navigation';
 import Icon from "react-native-vector-icons/FontAwesome";
-import Quests from './src/screens/Quests/Quests';
-import {db} from './src/config';
-import AddQuest from './src/screens/AddQuest/AddQuest';
+// import Quests from './src/screens/Quests/Quests';
+// import {db} from './src/firebase/firebase';
+// import AddQuest from './src/screens/AddQuest/AddQuest';
+import Register from './src/screens/Register/Register';
+import Login from './src/screens/Login/Login';
 
 
 export default class App extends React.Component{
   render() {
     return (
-        <AppContainer />
+      <Login/>
+        // <AppContainer />
     );
   }
 }

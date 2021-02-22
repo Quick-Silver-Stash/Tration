@@ -70,10 +70,9 @@ export default function Login() {
                     Don't have an account yet?
                 </Text>
             </TouchableOpacity>
-            {/* <TouchableOpacity style={styles.loginButton}>
-                <Text style={styles.loginText}>LOGIN</Text>
-            </TouchableOpacity> */}
-            <button onClick={loginUser}> LOG IN </button>
+            <TouchableOpacity style={styles.loginButton}>
+                <Text style={styles.loginText} onPress={loginUser}>LOGIN</Text>
+            </TouchableOpacity>
         </View>
     );
 }

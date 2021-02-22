@@ -37,10 +37,6 @@ export default function Register() {
       
         return (
           <View style={styles.container}>
-            <Image
-              style={styles.image}
-              source={require("./assets/placeholder-logo-1.png")}
-            />
             <StatusBar style='auto'/>
             <View style={styles.inputView}>
               <TextInput
