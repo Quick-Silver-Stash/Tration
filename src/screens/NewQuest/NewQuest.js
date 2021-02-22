@@ -1,5 +1,7 @@
 import React, {Component, useState} from 'react';
 import {  View, Text, Image, StyleSheet, Button, ScrollView, TouchableOpacity, TextInput } from 'react-native';
+import firebase from 'firebase/app';
+import 'firebase/functions';
 
 function AddQuest(props){
   const [title, setTitle] = useState("");
@@ -7,6 +9,28 @@ function AddQuest(props){
   const [selectedType, setSelectedType] = useState("")
   const [selectedFreq, setSelectedFreq] = useState("")
 
+  function sendQuest(){
+    const newQuest = firebase.functions().httpsCallable('addQuest');
+    newQuest({
+      title: title,
+      description: desc,
+      questType: selectedType,
+      questFrequency: selectedFreq,
+      isComplete: false,
+      isActive: true,
+      createdOn: "2021-02-20",
+      updatedOn: "2021-02-20",
+      userId: "justin.do"
+    })
+    .then(result => {
+      console.log("Result writing")
+      console.log(result)
+    })
+    .catch(error => {
+      console.log("error happened")
+      console.log(error);
+    });
+  }
 
   return(
     <View style = {{height: '100%', backgroundColor: 'white'}}>
@@ -63,7 +87,7 @@ function AddQuest(props){
           <TouchableOpacity style = {[styles.decisionButton, {backgroundColor: '#F43838'}]}  onPress= {props.pressCancel}>
             <Text style = {styles.buttonText}>Cancel</Text>
           </TouchableOpacity>
-          <TouchableOpacity style = {[styles.decisionButton, {backgroundColor: '#2BC803'}]} onPress= {props.pressCancel}>
+          <TouchableOpacity style = {[styles.decisionButton, {backgroundColor: '#2BC803'}]} onPress= {() => sendQuest()}>
             <Text style = {styles.buttonText}>Submit</Text>
           </TouchableOpacity>
       </View>

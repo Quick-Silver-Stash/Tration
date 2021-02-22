@@ -1,7 +1,7 @@
 import React, {Component, useState, useEffect } from 'react';
 import {  View, Text, StyleSheet, Button, ScrollView, TouchableOpacity, Modal, TouchableWithoutFeedback   } from 'react-native';
 import Quest from './Quest/Quest';
-import AddQuest from '../AddQuest/AddQuest';
+import NewQuest from '../NewQuest/NewQuest';
 import Icon from "react-native-vector-icons/FontAwesome";
 import {db} from '../../config';
 
@@ -19,7 +19,7 @@ function Quests(){
   });
   const [allQuests, setAllQuests] = useState([]);
   const [showQuest, setShowQuest] = useState(false);
-  const [showAddQuest, setShowAddQuest] = useState(false);
+  const [showNewQuest, setShowNewQuest] = useState(false);
 
   useEffect(() => {
     db.ref('/Quest').on('value', querySnapShot => {
@@ -115,10 +115,10 @@ function Quests(){
           {displayQuests}
         </ScrollView>
       </View>
-      <View style = {styles.addQuestView}>
+      <View style = {styles.newQuestView}>
         <TouchableOpacity
-          style={styles.addQuestButton}
-          onPress={() => setShowAddQuest(true)}
+          style={styles.newQuestButton}
+          onPress={() => setShowNewQuest(true)}
         >
           <Icon name={"plus"}  size={30} color="#219DFC" />
         </TouchableOpacity>
@@ -141,14 +141,14 @@ function Quests(){
       </Modal>
       <Modal
         transparent={true}
-        visible= {showAddQuest}
+        visible= {showNewQuest}
         animationType="fade"
       >
-        <TouchableOpacity style = {styles.modalView} onPress={() => setShowAddQuest(false)}>
+        <TouchableOpacity style = {styles.modalView} onPress={() => setShowNewQuest(false)}>
           <View style = {{height:'70%', width:'90%'}}>
             <TouchableOpacity activeOpacity = {1}>
-              <AddQuest
-                pressCancel = {() => setShowAddQuest(false)}
+              <NewQuest
+                pressCancel = {() => setShowNewQuest(false)}
               />
             </TouchableOpacity >
           </View>
@@ -219,10 +219,10 @@ const styles = StyleSheet.create({
       width: '100%',
       backgroundColor: 'rgba(0,0,0,0.5)'
     },
-    addQuestView: {
+    newQuestView: {
       flexDirection: 'row-reverse',
     },
-    addQuestButton: {
+    newQuestButton: {
       borderWidth:1,
       borderColor:'rgba(0,0,0,0.2)',
       alignItems:'center',
