@@ -1,5 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, Component } from "react";
+import firebase from "firebase/app";
+import "firebase/functions";
 import {
   StyleSheet,
   Text,
@@ -10,18 +12,55 @@ import {
   View,
 } from "react-native";
 
+function registerUser(firstName, lastName, email, password) {
+  let registerFn = firebase.functions().httpsCallable('register');
+  registerFn({ firstName: firstName, lastName: lastName, email: email, password: password})
+    .then((result) => {
+      console.log("Successfully registered user");
+      console.log(result);
+    })
+    .catch((result) => {
+      console.log("Registration failed");
+      let code = error.code;
+      let message = error.message;
+      let details = error.details;
+      console.log(code);
+      console.log(message);
+      console.log(details);
+    })
+}
+
 export default function Register() {
         const [email, setEmail] = useState("");
         const [password, setPassword] = useState("");
-        const [confirmPassword, setConfirmPassword] = useSate("");
+        const [firstName, setFirstName] = useState("");
+        const [lastName, setLastName] = useState("");
       
         return (
           <View style={styles.container}>
-            <Image
-              style={styles.image}
-              source={require("./assets/placeholder-logo-1.png")}
-            />
             <StatusBar style='auto'/>
+            <View style={styles.inputView}>
+              <TextInput
+                style={styles.TextInput}
+                placeholder="Enter First Name"
+                placeholderTextColor="#003f5c"
+                secureTextEntry={false}
+                autoCorrect={false}
+                onChangeText={(firstName) => setFirstName(firstName)}
+                value={firstName}
+              />
+            </View>
+            <View style={styles.inputView}>
+              <TextInput
+                style={styles.TextInput}
+                placeholder="Enter Last Name"
+                placeholderTextColor="#003f5c"
+                secureTextEntry={false}
+                autoCorrect={false}
+                onChangeText={(lastName) => setLastName(lastName)}
+                value={lastName}
+              />
+            </View>
             <View style={styles.inputView}>
               <TextInput
                 style={styles.TextInput}
@@ -29,7 +68,7 @@ export default function Register() {
                 placeholderTextColor="#003f5c"
                 keyboardType="email-address"
                 secureTextEntry={false}
-                autoCapitalize={false}
+                autoCapitalize={"none"}
                 autoCorrect={false}
                 onChangeText={(email) => setEmail(email)}
                 value={email}
@@ -41,28 +80,16 @@ export default function Register() {
                 placeholder="Enter Password"
                 placeholderTextColor="#003f5c"
                 secureTextEntry={true}
-                autoCapitalize={false}
+                autoCapitalize={"none"}
                 autoCorrect={false}
                 onChangeText={(password) => setPassword(password)}
-                value={pasword}
-              />
-            </View>
-            <View style={styles.inputView}>
-              <TextInput
-                style={styles.TextInput}
-                placeholder="Confirm Password"
-                placeholderTextColor="#003f5c"
-                secureTextEntry={true}
-                autoCapitalize={false}
-                autoCorrect={false}
-                onChangeText={(confirmPassword) => setConfirmPassword(confirmPassword)}
-                value={confirmPassword}
+                value={password}
               />
             </View>
             <TouchableOpacity>
-              <Text style={styles.register_button}>Already have an account yet? Login</Text>
+              <Text style={styles.register_button}>Already have an account? Login</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.loginButton}>
+            <TouchableOpacity style={styles.loginButton} onPress={registerUser}>
               <Text style={styles.loginText}>SIGN UP</Text>
             </TouchableOpacity>
           </View>

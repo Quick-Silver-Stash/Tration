@@ -1,7 +1,7 @@
 import React, {Component, useState, useEffect } from 'react';
 import {  View, Text, StyleSheet, Button, ScrollView, TouchableOpacity, Modal, TouchableWithoutFeedback   } from 'react-native';
 import Quest from './Quest/Quest';
-import {db} from '../../config';
+import {db} from '../../firebase/firebase';
 
 function Quests(){
   const [selectedQuest, setSelectedQuest] = useState({
