@@ -1,6 +1,8 @@
 import React, {Component, useState, useEffect } from 'react';
 import {  View, Text, StyleSheet, Button, ScrollView, TouchableOpacity, Modal, TouchableWithoutFeedback   } from 'react-native';
 import Quest from './Quest/Quest';
+import NewQuest from '../NewQuest/NewQuest';
+import Icon from "react-native-vector-icons/FontAwesome";
 import {db} from '../../firebase/firebase';
 
 function Quests(){
@@ -17,6 +19,7 @@ function Quests(){
   });
   const [allQuests, setAllQuests] = useState([]);
   const [showQuest, setShowQuest] = useState(false);
+  const [showNewQuest, setShowNewQuest] = useState(false);
 
   useEffect(() => {
     db.ref('/Quest').on('value', querySnapShot => {
@@ -112,6 +115,14 @@ function Quests(){
           {displayQuests}
         </ScrollView>
       </View>
+      <View style = {styles.newQuestView}>
+        <TouchableOpacity
+          style={styles.newQuestButton}
+          onPress={() => setShowNewQuest(true)}
+        >
+          <Icon name={"plus"}  size={30} color="#219DFC" />
+        </TouchableOpacity>
+      </View>
       <Modal
         transparent={true}
         visible= {showQuest}
@@ -123,6 +134,21 @@ function Quests(){
               <Quest
                 pressCancel = {() => setShowQuest(false)}
                 questData = {selectedQuest}
+              />
+            </TouchableOpacity >
+          </View>
+        </TouchableOpacity>
+      </Modal>
+      <Modal
+        transparent={true}
+        visible= {showNewQuest}
+        animationType="fade"
+      >
+        <TouchableOpacity style = {styles.modalView} onPress={() => setShowNewQuest(false)}>
+          <View style = {{height:'70%', width:'90%'}}>
+            <TouchableOpacity activeOpacity = {1}>
+              <NewQuest
+                pressCancel = {() => setShowNewQuest(false)}
               />
             </TouchableOpacity >
           </View>
@@ -145,6 +171,7 @@ const styles = StyleSheet.create({
       alignSelf: 'flex-end',
     },
     categoryContainer: {
+      flex: 1,
       flexDirection: 'row',
       justifyContent: 'space-evenly',
       elevation: 10,
@@ -166,7 +193,8 @@ const styles = StyleSheet.create({
       textAlign: 'center',
     },
     questsContainer: {
-      height: "70%"
+      height: "70%",
+      flex: 10
     },
     quest:{
       elevation:15,
@@ -190,6 +218,19 @@ const styles = StyleSheet.create({
       height: '100%',
       width: '100%',
       backgroundColor: 'rgba(0,0,0,0.5)'
+    },
+    newQuestView: {
+      flexDirection: 'row-reverse',
+    },
+    newQuestButton: {
+      borderWidth:1,
+      borderColor:'rgba(0,0,0,0.2)',
+      alignItems:'center',
+      justifyContent:'center',
+      width:70,
+      height:70,
+      backgroundColor:'#fff',
+      borderRadius:50,
     }
 })
 
