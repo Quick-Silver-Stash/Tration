@@ -33,7 +33,8 @@ function registerUser(firstName, lastName, email, password) {
 export default function Register() {
         const [email, setEmail] = useState("");
         const [password, setPassword] = useState("");
-        const [confirmPassword, setConfirmPassword] = useSate("");
+        const [firstName, setFirstName] = useState("");
+        const [lastName, setLastName] = useState("");
       
         return (
           <View style={styles.container}>
@@ -41,11 +42,33 @@ export default function Register() {
             <View style={styles.inputView}>
               <TextInput
                 style={styles.TextInput}
+                placeholder="Enter First Name"
+                placeholderTextColor="#003f5c"
+                secureTextEntry={false}
+                autoCorrect={false}
+                onChangeText={(firstName) => setFirstName(firstName)}
+                value={firstName}
+              />
+            </View>
+            <View style={styles.inputView}>
+              <TextInput
+                style={styles.TextInput}
+                placeholder="Enter Last Name"
+                placeholderTextColor="#003f5c"
+                secureTextEntry={false}
+                autoCorrect={false}
+                onChangeText={(lastName) => setLastName(lastName)}
+                value={lastName}
+              />
+            </View>
+            <View style={styles.inputView}>
+              <TextInput
+                style={styles.TextInput}
                 placeholder="Enter Email"
                 placeholderTextColor="#003f5c"
                 keyboardType="email-address"
                 secureTextEntry={false}
-                autoCapitalize={false}
+                autoCapitalize={"none"}
                 autoCorrect={false}
                 onChangeText={(email) => setEmail(email)}
                 value={email}
@@ -57,31 +80,18 @@ export default function Register() {
                 placeholder="Enter Password"
                 placeholderTextColor="#003f5c"
                 secureTextEntry={true}
-                autoCapitalize={false}
+                autoCapitalize={"none"}
                 autoCorrect={false}
                 onChangeText={(password) => setPassword(password)}
-                value={pasword}
-              />
-            </View>
-            <View style={styles.inputView}>
-              <TextInput
-                style={styles.TextInput}
-                placeholder="Confirm Password"
-                placeholderTextColor="#003f5c"
-                secureTextEntry={true}
-                autoCapitalize={false}
-                autoCorrect={false}
-                onChangeText={(confirmPassword) => setConfirmPassword(confirmPassword)}
-                value={confirmPassword}
+                value={password}
               />
             </View>
             <TouchableOpacity>
               <Text style={styles.register_button}>Already have an account? Login</Text>
             </TouchableOpacity>
-            <button onClick={registerUser}> SIGN UP </button>
-            {/* <TouchableOpacity style={styles.loginButton}>
+            <TouchableOpacity style={styles.loginButton} onPress={registerUser}>
               <Text style={styles.loginText}>SIGN UP</Text>
-            </TouchableOpacity> */}
+            </TouchableOpacity>
           </View>
         );
 }

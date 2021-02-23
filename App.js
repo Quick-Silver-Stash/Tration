@@ -4,18 +4,19 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createAppContainer } from 'react-navigation';
 import Icon from "react-native-vector-icons/FontAwesome";
-// import Quests from './src/screens/Quests/Quests';
+import Quests from './src/screens/Quests/Quests';
 // import {db} from './src/firebase/firebase';
-// import AddQuest from './src/screens/AddQuest/AddQuest';
+import AddQuest from './src/screens/AddQuest/AddQuest';
 import Register from './src/screens/Register/Register';
 import Login from './src/screens/Login/Login';
+import Quest from './src/screens/Quests/Quest/Quest';
 
 
 export default class App extends React.Component{
   render() {
     return (
-      <Login/>
-        // <AppContainer />
+      // <Login/>
+        <AppContainer />
     );
   }
 }
@@ -31,21 +32,21 @@ class LandingScreen extends React.Component {
   }
 }
 
-class SearchScreen extends React.Component {
+class RegisterScreen extends React.Component {
   render() {
     return(
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text> Temporary Search Screen </Text>
+        <Register/>
       </View>
     );
   }
 }
 
-class ProfileScreen extends React.Component {
+class LoginScreen extends React.Component {
   render() {
     return(
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text> Temporary Profile Screen </Text>
+        <Login/>
       </View>
     );
   }
@@ -55,7 +56,7 @@ class QuestScreen extends React.Component {
   render() {
     return(
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text> Temporary Quest Screen </Text>
+        <AddQuest/>
       </View>
     );
   }
@@ -71,16 +72,16 @@ const bottomTabNavigator = createBottomTabNavigator(
         )
       }
     },
-    Search: {
-      screen: SearchScreen,
+    Register: {
+      screen: RegisterScreen,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => (
           <Icon name="search" size={25} color={tintColor} />
         )
       }
     },
-    Profile: {
-      screen: ProfileScreen,
+    Login: {
+      screen: LoginScreen,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => (
           <Icon name="user" size={25} color={tintColor} />
