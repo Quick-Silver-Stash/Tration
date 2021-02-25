@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontWeight: 'bold',
-    fontSize: 15,cd
+    fontSize: 15,
   }
 })
 
