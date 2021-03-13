@@ -22,7 +22,7 @@ function Quests(){
   const [showNewQuest, setShowNewQuest] = useState(false);
 
   useEffect(() => {
-    db.ref('/Quest').on('value', querySnapShot => {
+    db.ref('/quests').on('value', querySnapShot => {
       /*An array to store data relevant to the user*/
        let dataObjects =  [];
        /*Loop over queried quests and retrieve only relevant data*/

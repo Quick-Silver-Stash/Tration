@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "516825269955",
+    "project_id": "tration-f3755",
+    "storage_bucket": "tration-f3755.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:516825269955:android:f089c0b27647e1aa6a8476",
+        "android_client_info": {
+          "package_name": "tration.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "516825269955-burs27tc0s46j1iclir70923qns74t4e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8LXNPnE4_sV_BJMLdQhvJqZbHGfD9olQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "516825269955-burs27tc0s46j1iclir70923qns74t4e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
