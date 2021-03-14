@@ -9,19 +9,21 @@ function NewQuest(props){
   const [selectedType, setSelectedType] = useState("")
   const [selectedFreq, setSelectedFreq] = useState("")
 
+  let req = {
+    title: title,
+    description: desc,
+    questType: selectedType,
+    questFrequency: selectedFreq,
+    isComplete: false,
+    isActive: true,
+    createdOn: "2021-02-20",
+    updatedOn: "2021-02-20",
+    userId: "justin.do"
+  }
+
   function sendQuest(){
     const newQuest = firebase.functions().httpsCallable('addQuest');
-    newQuest({
-      title: title,
-      description: desc,
-      questType: selectedType,
-      questFrequency: selectedFreq,
-      isComplete: false,
-      isActive: true,
-      createdOn: "2021-02-20",
-      updatedOn: "2021-02-20",
-      userId: "justin.do"
-    })
+    newQuest(req)
     .then(result => {
       console.log("Result writing")
       console.log(result)
@@ -69,9 +71,9 @@ function NewQuest(props){
             <Text style = {styles.buttonText}>Rest</Text>
           </TouchableOpacity>
         </View>
-
-
       </View>
+
+
       <View style = {styles.questFrequency}>
         <View style = {styles.qFreqContainer}>
           <TouchableOpacity style = {[styles.qFreqButton, {backgroundColor: selectedFreq == "Daily" ? '#9370DB' : '#ADD8E6'}]}  onPress={() => setSelectedFreq("Daily")}>
@@ -81,6 +83,7 @@ function NewQuest(props){
             <Text style = {styles.buttonText}>Extended</Text>
           </TouchableOpacity>
         </View>
+
 
       </View>
       <View style = {styles.decisionButtonContainer}>
