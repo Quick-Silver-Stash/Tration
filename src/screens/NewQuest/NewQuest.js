@@ -16,8 +16,8 @@ function NewQuest(props){
     questFrequency: selectedFreq,
     isComplete: false,
     isActive: true,
-    createdOn: "2021-02-20",
-    updatedOn: "2021-02-20",
+    createdOn: "2021-03-17",
+    updatedOn: "2021-03-17",
     userId: "justin.do"
   }
 
