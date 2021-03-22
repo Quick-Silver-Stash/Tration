@@ -4,20 +4,21 @@ import {  View, Text, Image, StyleSheet, Button, ScrollView, TouchableOpacity, T
 import firebase from 'firebase/app';
 import {db} from '../../firebase/firebase';
 import 'firebase/functions';
+
 let today = new Date().toISOString().slice(0, 10)
 today = new Date(today);
 
 function Diary(props){
-  const [weekQuests, setWeekQuests] = useState([],[],[],[],[],[],[])
+  const [weekQuests, setWeekQuests] = useState([[],[],[],[],[],[],[]]);
 
   useEffect(() => {
     db.ref('/quests').on('value', querySnapShot => {
       /*An array to store data relevant to the user*/
        let dataObjects =  [[],[],[],[],[],[],[]];
-       var date = new Date().getDate()
+       var date = new Date().getDate();
        /*Loop over queried quests and retrieve only relevant data*/
        querySnapShot.forEach(d => {
-         let data = d.val()
+         let data = d.val();
          let dataDate = new Date(data.updatedOn);
          let dayDiff = (today - dataDate) / (1000 * 60 * 60 * 24);
          if(dayDiff < 7){
@@ -35,17 +36,17 @@ function Diary(props){
       for(let i = 0; i < 7; i++){
         diaryPages[i].push(
           <View style={styles.diaryPage} key = {i}>
-            <Text style={styles.text} key = {i}>Page {i}</Text>
+            {dataObjects[i].length == 0 ? <Text>No Items</Text> : dataObjects[i]}
           </View>
         )
       }
-      setWeekQuests(diaryPages)
+      setWeekQuests(diaryPages);
     })
   }, []);
 
   return(
     <View style = {{height: '100%'}}>
-      <Swiper style={styles.wrapper} showsButtons={true} loop={false} showsPagination = {false}>
+      <Swiper showsButtons={true} loop={false} showsPagination = {false}>
         {weekQuests}
       </Swiper>
     </View>
