@@ -7,6 +7,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import Quests from './src/screens/Quests/Quests';
 import Register from './src/screens/Register/Register';
 import Login from './src/screens/Login/Login';
+import Diary from './src/components/Diary/Diary';
 
 export default class App extends React.Component{
   render() {
