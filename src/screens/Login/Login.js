@@ -13,11 +13,13 @@ import {
 } from "react-native";
 
 function loginUser(email, password) {
+  let session;
   let loginFn = firebase.functions().httpsCallable('login');
   loginFn({email: email, password: password})
     .then((result) => {
       console.log("Successfully Logged In");
       console.log(result);
+      session = result.user.tenantId
     })
     .catch((error) => {
       console.log("Login Failed")
@@ -34,6 +36,7 @@ function loginUser(email, password) {
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [session, setSession] = useState("");
 
     return (
         <View style={styles.container}>
@@ -71,7 +74,11 @@ export default function Login() {
                 </Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.loginButton}>
-                <Text style={styles.loginText} onPress={loginUser}>LOGIN</Text>
+                <Text 
+                style={styles.loginText} 
+                onPress={loginUser}
+                onChange={(session) => setSession(session)}
+                >LOGIN</Text>
             </TouchableOpacity>
         </View>
     );

@@ -1,7 +1,7 @@
 import React, {Component, useState} from 'react';
 import {  View, Text, Image, StyleSheet, Button, ScrollView, TouchableOpacity, TextInput } from 'react-native';
-import firebase from 'firebase/app';
-import 'firebase/functions';
+import firebase from "firebase/app";
+import "firebase/functions";
 
 function NewQuest(props){
   const [title, setTitle] = useState("");
@@ -10,8 +10,8 @@ function NewQuest(props){
   const [selectedFreq, setSelectedFreq] = useState("")
 
   function sendQuest(){
-    const newQuest = firebase.functions().httpsCallable('addQuest');
-    newQuest({
+    var addQuest = firebase.functions().httpsCallable('addQuest');
+    addQuest({
       title: title,
       description: desc,
       questType: selectedType,
@@ -87,7 +87,7 @@ function NewQuest(props){
           <TouchableOpacity style = {[styles.decisionButton, {backgroundColor: '#F43838'}]}  onPress= {props.pressCancel}>
             <Text style = {styles.buttonText}>Cancel</Text>
           </TouchableOpacity>
-          <TouchableOpacity style = {[styles.decisionButton, {backgroundColor: '#2BC803'}]} onPress= {() => sendQuest()}>
+          <TouchableOpacity style = {[styles.decisionButton, {backgroundColor: '#2BC803'}]} onPress= {() => registerUser()}>
             <Text style = {styles.buttonText}>Submit</Text>
           </TouchableOpacity>
       </View>
