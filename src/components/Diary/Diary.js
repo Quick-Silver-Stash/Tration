@@ -1,6 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
+import {  View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native';
 import Swiper from 'react-native-swiper'
-import {  View, Text, Image, StyleSheet, Button, ScrollView, TouchableOpacity, TextInput } from 'react-native';
+import Icon from "react-native-vector-icons/FontAwesome";
 import firebase from 'firebase/app';
 import {db} from '../../firebase/firebase';
 import 'firebase/functions';
@@ -46,6 +47,15 @@ function Diary(props){
 
   return(
     <View style = {{height: '100%'}}>
+      <View style = {styles.headerContainer}>
+        <View style={{flex: 1}}></View>
+        <View style = {styles.titleContainer}>
+          <Text style = {styles.title}>Diary</Text>
+        </View>
+        <View style = {styles.iconContainer}>
+          <Icon name="calendar" size={25} color={'#000'} />
+        </View>
+      </View>
       <Swiper showsButtons={true} loop={false} showsPagination = {false}>
         {weekQuests}
       </Swiper>
@@ -55,16 +65,36 @@ function Diary(props){
 
 
 const styles = StyleSheet.create({
-  diaryPage: {
+  headerContainer:{
+    flexDirection: 'row'
+  },
+  titleContainer: {
     flex: 1,
+    flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#9DD6EB'
+  },
+  title: {
+    color: '#000',
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 15,
+  },
+  iconContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
   text: {
     color: '#fff',
     fontSize: 30,
     fontWeight: 'bold'
+  },
+  diaryPage: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#9DD6EB',
+    borderRadius: 10
   },
   quest:{
     elevation:15,
