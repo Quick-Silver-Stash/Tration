@@ -20,8 +20,7 @@ function Quests(){
   const [allQuests, setAllQuests] = useState([]);
   const [showQuest, setShowQuest] = useState(false);
   const [showNewQuest, setShowNewQuest] = useState(false);
-  /*Start from showing daily quests*/
-  const [selectedFreq, setSelectedFreq] = useState("Daily");
+  const [selectedFreq, setSelectedFreq] = useState("");
 
   useEffect(() => {
     db.ref('/quests').on('value', querySnapShot => {
@@ -81,7 +80,8 @@ function Quests(){
 
   /*Create a TouchableOpacity of every quest that is relevant to the user*/
   let displayQuests = allQuests.map(q => {
-    if(q.questFrequency == selectedFreq){
+    /*Either when matching filter or if there is nothing to filter on*/
+    if(q.questFrequency == selectedFreq || selectedFreq == ""){
       /*Change color of quest displayed depending on isActive*/
       return <TouchableOpacity
         style = {[styles.quest, {backgroundColor: q.isActive ? '#2BC803' : '#F43838'}]}
@@ -99,13 +99,13 @@ function Quests(){
         <Text style = {styles.headline}>Quests</Text>
       </View>
       <View style = {styles.categoryContainer}>
-          <TouchableOpacity onPress = {() => setSelectedFreq("Daily")}>
-            <View style = {styles.categoryToggle}>
+          <TouchableOpacity onPress = {() => setSelectedFreq(selectedFreq == "Daily" ? "" : "Daily")}>
+          <View style = {[styles.categoryToggle, {backgroundColor: selectedFreq == "Daily" ? "#9400D3" : '#219DFC'}]}>
               <Text style = {styles.categoryText}>Daily</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress = {() => setSelectedFreq("Extended")}>
-            <View style = {styles.categoryToggle}>
+          <TouchableOpacity onPress = {() => setSelectedFreq(selectedFreq == "Extended" ? "" : "Extended")}>
+            <View style = {[styles.categoryToggle, {backgroundColor: selectedFreq == "Extended" ? "#9400D3" : '#219DFC'}]}>
               <Text style = {styles.categoryText}>Extended</Text>
             </View>
           </TouchableOpacity>
@@ -152,7 +152,7 @@ function Quests(){
           <View style = {{height:'70%', width:'90%'}}>
             <TouchableOpacity activeOpacity = {1}>
               <NewQuest
-                pressCancel = {() => setShowNewQuest(false)}
+                closeModal = {() => setShowNewQuest(false)}
               />
             </TouchableOpacity >
           </View>
@@ -184,7 +184,6 @@ const styles = StyleSheet.create({
       marginBottom: 10
     },
     categoryToggle: {
-      backgroundColor: '#219DFC',
       width: 150,
       height: 50,
       borderRadius: 10,

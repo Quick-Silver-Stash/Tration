@@ -32,7 +32,10 @@ function NewQuest(props){
       console.log("error happened")
       console.log(error);
     });
+    /*After submitting, close the modal*/
+    props.closeModal()
   }
+
 
   return(
     <View style = {{height: '100%', backgroundColor: 'white'}}>
@@ -87,7 +90,7 @@ function NewQuest(props){
 
       </View>
       <View style = {styles.decisionButtonContainer}>
-          <TouchableOpacity style = {[styles.decisionButton, {backgroundColor: '#F43838'}]}  onPress= {props.pressCancel}>
+          <TouchableOpacity style = {[styles.decisionButton, {backgroundColor: '#F43838'}]}  onPress= {props.closeModal}>
             <Text style = {styles.buttonText}>Cancel</Text>
           </TouchableOpacity>
           <TouchableOpacity style = {[styles.decisionButton, {backgroundColor: '#2BC803'}]} onPress= {() => sendQuest()}>
