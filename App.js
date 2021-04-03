@@ -8,7 +8,7 @@ import Quests from './src/screens/Quests/Quests';
 import Profile from './src/screens/Profile';
 import Register from './src/screens/Register/Register';
 import Login from './src/screens/Login/Login';
-import Diary from './src/components/Diary/Diary';
+import Profile from './src/screens/Profile/Profile';
 
 export default class App extends React.Component{
   render() {
