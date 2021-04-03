@@ -20,6 +20,8 @@ function Quests(){
   const [allQuests, setAllQuests] = useState([]);
   const [showQuest, setShowQuest] = useState(false);
   const [showNewQuest, setShowNewQuest] = useState(false);
+  /*Start from showing daily quests*/
+  const [selectedFreq, setSelectedFreq] = useState("Daily");
 
   useEffect(() => {
     db.ref('/quests').on('value', querySnapShot => {
@@ -79,14 +81,16 @@ function Quests(){
 
   /*Create a TouchableOpacity of every quest that is relevant to the user*/
   let displayQuests = allQuests.map(q => {
-    /*Change color of quest displayed depending on isActive*/
-    return <TouchableOpacity
-      style = {[styles.quest, {backgroundColor: q.isActive ? '#2BC803' : '#F43838'}]}
-      onPress={() => selectQuest(q)}
-      key = {q.title}
-    >
-      <Text style = {styles.questText}> {q.title} </Text>
-    </TouchableOpacity>
+    if(q.questFrequency == selectedFreq){
+      /*Change color of quest displayed depending on isActive*/
+      return <TouchableOpacity
+        style = {[styles.quest, {backgroundColor: q.isActive ? '#2BC803' : '#F43838'}]}
+        onPress={() => selectQuest(q)}
+        key = {q.title}
+      >
+        <Text style = {styles.questText}> {q.title} </Text>
+      </TouchableOpacity>
+    }
   });
 
   return(
@@ -95,12 +99,12 @@ function Quests(){
         <Text style = {styles.headline}>Quests</Text>
       </View>
       <View style = {styles.categoryContainer}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress = {() => setSelectedFreq("Daily")}>
             <View style = {styles.categoryToggle}>
               <Text style = {styles.categoryText}>Daily</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress = {() => setSelectedFreq("Extended")}>
             <View style = {styles.categoryToggle}>
               <Text style = {styles.categoryText}>Extended</Text>
             </View>
