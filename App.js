@@ -4,10 +4,10 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createAppContainer } from 'react-navigation';
 import Icon from "react-native-vector-icons/FontAwesome";
+import Profile from './src/screens/Profile/Profile';
 import Quests from './src/screens/Quests/Quests';
 import Register from './src/screens/Register/Register';
 import Login from './src/screens/Login/Login';
-import Profile from './src/screens/Profile/Profile';
 
 export default class App extends React.Component{
   render() {
@@ -22,8 +22,8 @@ export default class App extends React.Component{
 class LandingScreen extends React.Component {
   render() {
     return(
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text> Temporary Landing Screen </Text>
+      <View style={{flex: 1}}>
+        <Profile />
       </View>
     );
   }
@@ -32,7 +32,7 @@ class LandingScreen extends React.Component {
 class RegisterScreen extends React.Component {
   render() {
     return(
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{flex: 1}}>
         <Register/>
       </View>
     );
@@ -42,7 +42,7 @@ class RegisterScreen extends React.Component {
 class LoginScreen extends React.Component {
   render() {
     return(
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{flex: 1}}>
         <Login/>
       </View>
     );
@@ -52,7 +52,7 @@ class LoginScreen extends React.Component {
 class QuestScreen extends React.Component {
   render() {
     return(
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{flex: 1}}>
         <Quests/>
       </View>
     );
